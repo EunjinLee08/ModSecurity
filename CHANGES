@@ -1,8 +1,8 @@
-v3.0.14 - 2025-Feb-21
+v3.0.14 - 2025-Feb-25
 ---------------------
 
   - [fix: fixed htmlEntityDecode methods]
-    [PR #3344 - @theseion,@airween]
+    [PR from private repo - @theseion,@airween; fixed CVE-2025-27110]
   - fix: Added missing header to avoid build error with gcc-15
     [PR #3342 - @airween]
   - Fix for issue #3334: build not finding YAJL

@@ -28,7 +28,7 @@ bool FuzzyHash::init(const std::string &param2, std::string *error) {
     std::string digit;
     std::string file;
     std::istream *iss;
-    struct fuzzy_hash_chunk *chunk, *t;
+    std::shared_ptr<fuzzy_hash_chunk> chunk, t;
     std::string err;
 
     auto pos = m_param.find_last_of(' ');
@@ -55,11 +55,10 @@ bool FuzzyHash::init(const std::string &param2, std::string *error) {
     }
 
     for (std::string line; std::getline(*iss, line); ) {
-       chunk = (struct fuzzy_hash_chunk *)calloc(1,
-            sizeof(struct fuzzy_hash_chunk));
+        chunk = std::make_shared<fuzzy_hash_chunk>();
 
-        chunk->data = strdup(line.c_str());
-        chunk->next = NULL;
+        chunk->data = std::shared_ptr<char>(strdup(line.c_str()), free);
+        chunk->next = nullptr;
 
         if (m_head == NULL) {
             m_head = chunk;
@@ -84,22 +83,15 @@ bool FuzzyHash::init(const std::string &param2, std::string *error) {
 }
 
 FuzzyHash::~FuzzyHash() {
-    struct fuzzy_hash_chunk *c = m_head;
-    while (c) {
-        struct fuzzy_hash_chunk *t = c;
-        free(c->data);
-        c->data = NULL;
-        c = c->next;
-        free(t);
-    }
-    m_head = NULL;
+
 }
 
 
 bool FuzzyHash::evaluate(Transaction *t, const std::string &str) {
 #ifdef WITH_SSDEEP
     char result[FUZZY_MAX_RESULT];
-    struct fuzzy_hash_chunk *chunk = m_head;
+    std::shared_ptr<fuzzy_hash_chunk> chunk = m_head;
+
 
     if (fuzzy_hash_buf((const unsigned char*)str.c_str(),
         str.size(), result)) {
@@ -108,7 +100,7 @@ bool FuzzyHash::evaluate(Transaction *t, const std::string &str) {
     }
 
     while (chunk != NULL) {
-        int i = fuzzy_compare(chunk->data, result);
+        int i = fuzzy_compare(chunk->data.get(), result);
         if (i >= m_threshold) {
             ms_dbg_a(t, 4, "Fuzzy hash: matched " \
                 "with score: " + std::to_string(i) + ".");

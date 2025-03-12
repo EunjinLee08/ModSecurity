@@ -82,11 +82,6 @@ bool FuzzyHash::init(const std::string &param2, std::string *error) {
 #endif
 }
 
-FuzzyHash::~FuzzyHash() {
-
-}
-
-
 bool FuzzyHash::evaluate(Transaction *t, const std::string &str) {
 #ifdef WITH_SSDEEP
     char result[FUZZY_MAX_RESULT];

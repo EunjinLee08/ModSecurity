@@ -1638,7 +1638,7 @@ bool Multipart::process(const std::string& data, std::string *error,
                     }
                 } else { /* It looks like a boundary but */
                          /* we couldn't match it. */
-                    char *p = NULL;
+                    const char *p = NULL;
 
                     /* Check if an attempt to use quotes around the
                      * boundary was made. */

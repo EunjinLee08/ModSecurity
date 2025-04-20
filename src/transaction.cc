@@ -148,8 +148,8 @@ Transaction::Transaction(ModSecurity *ms, RulesSet *rules, const char *id,
     m_json(nullptr),
 #endif
     m_secRuleEngine(RulesSetProperties::PropertyNotSetRuleEngine),
-    m_logCbData(logCbData),
     m_secXMLParseXmlIntoArgs(rules->m_secXMLParseXmlIntoArgs),
+    m_logCbData(logCbData),
     TransactionAnchoredVariables(this) {
     m_variableUrlEncodedError.set("0", 0);
     m_variableMscPcreError.set("0", 0);

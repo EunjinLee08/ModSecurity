@@ -37,13 +37,13 @@ NodeData::~NodeData() {};
 /*
 * XMLNodes for parsing XML into args
 */
-XMLNodes::XMLNodes(Transaction *transaction) {
-    nodes = {};
-    node_depth = 0;
-    currpath = "";
-    currval  = "";
-    m_transaction = transaction;
-}
+XMLNodes::XMLNodes(Transaction *transaction) 
+    : nodes{},
+    node_depth(0),
+    currpath(""),
+    currval(""),
+    m_transaction(transaction)
+    {}
 
 XMLNodes::~XMLNodes() {};
 
@@ -76,7 +76,7 @@ class MSCSAXHandler {
         void onEndElement(void * ctx, const xmlChar *localname) {
             std::string name = reinterpret_cast<const char*>(localname);
             XMLNodes* xml_data = static_cast<XMLNodes*>(ctx);
-            std::shared_ptr<NodeData>& nd = xml_data->nodes[xml_data->nodes.size()-1];
+            const std::shared_ptr<NodeData>& nd = xml_data->nodes[xml_data->nodes.size()-1];
             if (nd->has_child == true) {
                 // check the return value
                 // if it false, then stop parsing

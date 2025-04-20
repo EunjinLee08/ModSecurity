@@ -268,10 +268,13 @@ bool XML::processChunk(const char *buf, unsigned int size,
     }
 
     if (m_data.parsing_ctx_arg != NULL &&
-        m_transaction->m_secXMLParseXmlIntoArgs
-        == RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs ||
-        m_transaction->m_secXMLParseXmlIntoArgs
-        == RulesSetProperties::TrueConfigXMLParseXmlIntoArgs) {
+        (
+            m_transaction->m_secXMLParseXmlIntoArgs
+              == RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs
+            ||
+            m_transaction->m_secXMLParseXmlIntoArgs
+              == RulesSetProperties::TrueConfigXMLParseXmlIntoArgs)
+        ) {
         xmlSetGenericErrorFunc(m_data.parsing_ctx_arg, null_error);
         xmlParseChunk(m_data.parsing_ctx_arg, buf, size, 0);
         if (m_data.parsing_ctx_arg->wellFormed != 1) {

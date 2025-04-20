@@ -254,7 +254,8 @@ bool XML::processChunk(const char *buf, unsigned int size,
     }
 
     /* Not a first invocation. */
-    if (m_transaction->m_secXMLParseXmlIntoArgs
+    if (m_data.parsing_ctx != NULL &&
+        m_transaction->m_secXMLParseXmlIntoArgs
         != RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs) {
         xmlSetGenericErrorFunc(m_data.parsing_ctx, null_error);
         xmlParseChunk(m_data.parsing_ctx, buf, size, 0);
@@ -266,7 +267,8 @@ bool XML::processChunk(const char *buf, unsigned int size,
         }
     }
 
-    if (m_transaction->m_secXMLParseXmlIntoArgs
+    if (m_data.parsing_ctx_arg != NULL &&
+        m_transaction->m_secXMLParseXmlIntoArgs
         == RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs ||
         m_transaction->m_secXMLParseXmlIntoArgs
         == RulesSetProperties::TrueConfigXMLParseXmlIntoArgs) {
@@ -286,7 +288,8 @@ bool XML::processChunk(const char *buf, unsigned int size,
 bool XML::complete(std::string *error) {
     /* Only if we have a context, meaning we've done some work. */
     if (m_data.parsing_ctx != NULL || m_data.parsing_ctx_arg != NULL) {
-        if (m_transaction->m_secXMLParseXmlIntoArgs
+        if (m_data.parsing_ctx != NULL &&
+            m_transaction->m_secXMLParseXmlIntoArgs
             != RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs) {
             /* This is how we signalise the end of parsing to libxml. */
             xmlParseChunk(m_data.parsing_ctx, NULL, 0, 1);
@@ -307,10 +310,14 @@ bool XML::complete(std::string *error) {
                 return false;
             }
         }
-        if (m_transaction->m_secXMLParseXmlIntoArgs
-            == RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs ||
-            m_transaction->m_secXMLParseXmlIntoArgs
-            == RulesSetProperties::TrueConfigXMLParseXmlIntoArgs) {
+        if (m_data.parsing_ctx_arg != NULL &&
+            (
+                m_transaction->m_secXMLParseXmlIntoArgs
+                  == RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs
+                  ||
+                m_transaction->m_secXMLParseXmlIntoArgs
+                  == RulesSetProperties::TrueConfigXMLParseXmlIntoArgs)
+            ) {
             /* This is how we signalise the end of parsing to libxml. */
             if (xmlParseChunk(m_data.parsing_ctx_arg, NULL, 0, 1) != 0) {
                 if (m_data.xml_error != "") {

@@ -52,6 +52,11 @@
         to = (from == PropertyNotSetBodyLimitAction) ? default : from;       \
     }
 
+#define merge_xmlargparse_value(to, from, default)                               \
+    if (to == PropertyNotSetConfigXMLParseXmlIntoArgs) {                                 \
+        to = (from == PropertyNotSetConfigXMLParseXmlIntoArgs) ? default : from;         \
+    }
+
 #ifdef __cplusplus
 
 namespace modsecurity {
@@ -177,6 +182,7 @@ class RulesSetProperties {
         m_secRequestBodyAccess(PropertyNotSetConfigBoolean),
         m_secResponseBodyAccess(PropertyNotSetConfigBoolean),
         m_secXMLExternalEntity(PropertyNotSetConfigBoolean),
+        m_secXMLParseXmlIntoArgs(PropertyNotSetConfigXMLParseXmlIntoArgs),
         m_tmpSaveUploadedFiles(PropertyNotSetConfigBoolean),
         m_uploadKeepFiles(PropertyNotSetConfigBoolean),
         m_debugLog(new DebugLog()),
@@ -191,6 +197,7 @@ class RulesSetProperties {
         m_secRequestBodyAccess(PropertyNotSetConfigBoolean),
         m_secResponseBodyAccess(PropertyNotSetConfigBoolean),
         m_secXMLExternalEntity(PropertyNotSetConfigBoolean),
+        m_secXMLParseXmlIntoArgs(PropertyNotSetConfigXMLParseXmlIntoArgs),
         m_tmpSaveUploadedFiles(PropertyNotSetConfigBoolean),
         m_uploadKeepFiles(PropertyNotSetConfigBoolean),
         m_debugLog(debugLog),
@@ -218,7 +225,9 @@ class RulesSetProperties {
 
     /**
      *
-     *
+     * The ConfigBoolean enumerator consists in mapping the different
+     * states of the configuration boolean values.
+     * The default value is PropertyNotSetConfigBoolean.
      */
     enum ConfigBoolean {
         TrueConfigBoolean,
@@ -226,6 +235,18 @@ class RulesSetProperties {
         PropertyNotSetConfigBoolean
     };
 
+    /**
+     *
+     * The ConfigXMLParseXmlIntoArgs enumerator consists in mapping the
+     * different states of the configuration XMLParseXmlIntoArgs values.
+     * The default value is PropertyNotSetConfigXMLParseXmlIntoArgs.
+     */
+    enum ConfigXMLParseXmlIntoArgs {
+        TrueConfigXMLParseXmlIntoArgs,
+        FalseConfigXMLParseXmlIntoArgs,
+        OnlyArgsConfigXMLParseXmlIntoArgs,
+        PropertyNotSetConfigXMLParseXmlIntoArgs
+    };
 
     /**
      *
@@ -338,6 +359,19 @@ class RulesSetProperties {
         }
     }
 
+    static std::string configXMLParseXmlIntoArgsString(ConfigXMLParseXmlIntoArgs i) {
+        switch (i) {
+        case TrueConfigXMLParseXmlIntoArgs:
+            return "True";
+        case FalseConfigXMLParseXmlIntoArgs:
+            return "False";
+        case OnlyArgsConfigXMLParseXmlIntoArgs:
+            return "OnlyArgs";
+        case PropertyNotSetConfigXMLParseXmlIntoArgs:
+        default:
+            return "Not set";
+        }
+    }
 
     static int mergeProperties(RulesSetProperties *from,
         RulesSetProperties *to, std::ostringstream *err) {
@@ -356,6 +390,10 @@ class RulesSetProperties {
         merge_boolean_value(to->m_secXMLExternalEntity,
                             from->m_secXMLExternalEntity,
                             PropertyNotSetConfigBoolean);
+
+        merge_xmlargparse_value(to->m_secXMLParseXmlIntoArgs,
+                            from->m_secXMLParseXmlIntoArgs,
+                            PropertyNotSetConfigXMLParseXmlIntoArgs);
 
         merge_boolean_value(to->m_uploadKeepFiles,
                             from->m_uploadKeepFiles,
@@ -464,6 +502,7 @@ class RulesSetProperties {
     ConfigBoolean m_secRequestBodyAccess;
     ConfigBoolean m_secResponseBodyAccess;
     ConfigBoolean m_secXMLExternalEntity;
+    ConfigXMLParseXmlIntoArgs m_secXMLParseXmlIntoArgs;
     ConfigBoolean m_tmpSaveUploadedFiles;
     ConfigBoolean m_uploadKeepFiles;
     ConfigDouble m_argumentsLimit;

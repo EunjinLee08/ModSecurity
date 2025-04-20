@@ -635,6 +635,8 @@ class Transaction : public TransactionAnchoredVariables, public TransactionSecMa
 
     std::vector<std::shared_ptr<RequestBodyProcessor::MultipartPartTmpFile>> m_multipartPartTmpFiles;
 
+    int m_secXMLParseXmlIntoArgs;
+
  private:
 
     Transaction(ModSecurity *ms, RulesSet *rules, const char *id,

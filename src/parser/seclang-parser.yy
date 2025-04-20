@@ -27,6 +27,7 @@ class Driver;
 #include "src/actions/chain.h"
 #include "src/actions/ctl/audit_engine.h"
 #include "src/actions/ctl/audit_log_parts.h"
+#include "src/actions/ctl/parse_xml_into_args.h"
 #include "src/actions/ctl/request_body_access.h"
 #include "src/actions/ctl/rule_engine.h"
 #include "src/actions/ctl/request_body_processor_json.h"
@@ -478,7 +479,7 @@ using namespace modsecurity::operators;
   OPERATOR_VERIFY_CC                           "OPERATOR_VERIFY_CC"
   OPERATOR_VERIFY_CPF                          "OPERATOR_VERIFY_CPF"
   OPERATOR_VERIFY_SSN                          "OPERATOR_VERIFY_SSN"
-  OPERATOR_VERIFY_SVNR                          "OPERATOR_VERIFY_SVNR"
+  OPERATOR_VERIFY_SVNR                         "OPERATOR_VERIFY_SVNR"
   OPERATOR_WITHIN                              "OPERATOR_WITHIN"
 
   CONFIG_DIR_AUDIT_LOG_FMT
@@ -502,6 +503,7 @@ using namespace modsecurity::operators;
   ACTION_CTL_BDY_XML                           "ACTION_CTL_BDY_XML"
   ACTION_CTL_BDY_URLENCODED                    "ACTION_CTL_BDY_URLENCODED"
   ACTION_CTL_FORCE_REQ_BODY_VAR                "ACTION_CTL_FORCE_REQ_BODY_VAR"
+  ACTION_CTL_PARSE_XML_INTO_ARGS               "ACTION_CTL_PARSE_XML_INTO_ARGS"
   ACTION_CTL_REQUEST_BODY_ACCESS               "ACTION_CTL_REQUEST_BODY_ACCESS"
   ACTION_CTL_RULE_REMOVE_BY_ID                 "ACTION_CTL_RULE_REMOVE_BY_ID"
   ACTION_CTL_RULE_REMOVE_BY_TAG                "ACTION_CTL_RULE_REMOVE_BY_TAG"
@@ -649,6 +651,7 @@ using namespace modsecurity::operators;
   CONFIG_VALUE_ABORT                           "CONFIG_VALUE_ABORT"
   CONFIG_VALUE_DETC                            "CONFIG_VALUE_DETC"
   CONFIG_VALUE_HTTPS                           "CONFIG_VALUE_HTTPS"
+  CONFIG_VALUE_ONLYARGS                        "CONFIG_VALUE_ONLYARGS"
   CONFIG_VALUE_OFF                             "CONFIG_VALUE_OFF"
   CONFIG_VALUE_ON                              "CONFIG_VALUE_ON"
   CONFIG_VALUE_PARALLEL                        "CONFIG_VALUE_PARALLEL"
@@ -658,6 +661,7 @@ using namespace modsecurity::operators;
   CONFIG_VALUE_SERIAL                          "CONFIG_VALUE_SERIAL"
   CONFIG_VALUE_WARN                            "CONFIG_VALUE_WARN"
   CONFIG_XML_EXTERNAL_ENTITY                   "CONFIG_XML_EXTERNAL_ENTITY"
+  CONFIG_XML_PARSE_XML_INTO_ARGS               "CONFIG_XML_PARSE_XML_INTO_ARGS"
   CONGIG_DIR_RESPONSE_BODY_MP                  "CONGIG_DIR_RESPONSE_BODY_MP"
   CONGIG_DIR_SEC_ARG_SEP                       "CONGIG_DIR_SEC_ARG_SEP"
   CONGIG_DIR_SEC_COOKIE_FORMAT                 "CONGIG_DIR_SEC_COOKIE_FORMAT"
@@ -1686,6 +1690,18 @@ expression:
       {
         driver.m_secXMLExternalEntity = modsecurity::RulesSetProperties::TrueConfigBoolean;
       }
+    | CONFIG_XML_PARSE_XML_INTO_ARGS CONFIG_VALUE_ONLYARGS
+      {
+        driver.m_secXMLParseXmlIntoArgs = modsecurity::RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs;
+      }
+    | CONFIG_XML_PARSE_XML_INTO_ARGS CONFIG_VALUE_OFF
+      {
+        driver.m_secXMLParseXmlIntoArgs = modsecurity::RulesSetProperties::FalseConfigXMLParseXmlIntoArgs;
+      }
+    | CONFIG_XML_PARSE_XML_INTO_ARGS CONFIG_VALUE_ON
+      {
+        driver.m_secXMLParseXmlIntoArgs = modsecurity::RulesSetProperties::TrueConfigXMLParseXmlIntoArgs;
+      }
     | CONGIG_DIR_SEC_TMP_DIR
       {
 /* Parser error disabled to avoid breaking default installations with modsecurity.conf-recommended
@@ -2695,6 +2711,18 @@ act:
       {
         //ACTION_NOT_SUPPORTED("CtlForceReequestBody", @0);
         ACTION_CONTAINER($$, new actions::Action($1));
+      }
+    | ACTION_CTL_PARSE_XML_INTO_ARGS CONFIG_VALUE_ON
+      {
+        ACTION_CONTAINER($$, new actions::ctl::ParseXmlIntoArgs("ctl:parseXmlIntoArgs=on"));
+      }
+    | ACTION_CTL_PARSE_XML_INTO_ARGS CONFIG_VALUE_OFF
+      {
+        ACTION_CONTAINER($$, new actions::ctl::ParseXmlIntoArgs("ctl:parseXmlIntoArgs=off"));
+      }
+    | ACTION_CTL_PARSE_XML_INTO_ARGS CONFIG_VALUE_ONLYARGS
+      {
+        ACTION_CONTAINER($$, new actions::ctl::ParseXmlIntoArgs("ctl:parseXmlIntoArgs=onlyargs"));
       }
     | ACTION_CTL_REQUEST_BODY_ACCESS CONFIG_VALUE_ON
       {

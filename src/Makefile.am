@@ -119,6 +119,7 @@ ACTIONS = \
 	actions/chain.cc \
 	actions/ctl/audit_log_parts.cc \
 	actions/ctl/audit_engine.cc \
+	actions/ctl/parse_xml_into_args.cc \
 	actions/ctl/rule_engine.cc \
 	actions/ctl/request_body_processor_json.cc \
 	actions/ctl/request_body_processor_xml.cc \

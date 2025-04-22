@@ -311,7 +311,7 @@ class RulesSetProperties {
     };
 
 
-    static const char *ruleEngineStateString(RuleEngine i) {
+    static std::string ruleEngineStateString(RuleEngine i) {
         switch (i) {
         case DisabledRuleEngine:
             return "Disabled";
@@ -322,7 +322,7 @@ class RulesSetProperties {
         case PropertyNotSetRuleEngine:
             return "PropertyNotSet/DetectionOnly";
         }
-        return NULL;
+        return std::string{};
     }
 
 

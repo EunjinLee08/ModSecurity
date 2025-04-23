@@ -1599,7 +1599,7 @@ std::string Transaction::toJSON(int parts) {
         utils::string::dash_if_empty(
             m_variableRequestMethod.evaluate()));
 
-    LOGFY_ADD_INT("http_version", m_httpVersion.c_str());
+    LOGFY_ADD("http_version", m_httpVersion);
     LOGFY_ADD("uri", this->m_uri);
 
     if (parts & audit_log::AuditLog::CAuditLogPart) {

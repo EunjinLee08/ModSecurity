@@ -8,7 +8,7 @@
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * If any of the files related to licensing are missing or if you have any
- * other questions related to licensing please contact Trustwave Holdings, Inc.
+ * other questions related to licensing please contact OWASP.
  * directly using the email address modsecurity@owasp.org
  *
  */

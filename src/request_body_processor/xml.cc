@@ -263,7 +263,7 @@ bool XML::processChunk(const char *buf, unsigned int size,
         m_data.xml_parser_state->parsing_ctx_arg = m_data.parsing_ctx_arg;
         if (m_data.parsing_ctx->wellFormed != 1) {
             error->assign("XML: Failed to parse document.");
-            ms_dbg_a(m_transaction, 4, "XML: Failed parsing document.");
+            ms_dbg_a(m_transaction, 4, "XML: Failed to parse document.");
             return false;
         }
     }

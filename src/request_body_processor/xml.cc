@@ -327,7 +327,7 @@ bool XML::complete(std::string *error) {
                     error->assign(m_data.xml_error);
                 }
                 else {
-                    error->assign("XML: Failed parsing document for ARGS.");
+                    error->assign("XML: Failed to parse document for ARGS.");
                 }
                 xmlFreeParserCtxt(m_data.parsing_ctx_arg);
                 m_data.parsing_ctx_arg = NULL;

@@ -73,7 +73,7 @@ struct xml_data {
     /* error reporting and XML array flag */
     std::string               xml_error;
 
-    /* another parser context for arguments */
+    /* additional parser context for arguments */
     xmlParserCtxtPtr          parsing_ctx_arg;
 
     /* parser state for SAX parser */

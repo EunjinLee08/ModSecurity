@@ -55,7 +55,7 @@ class XMLNodes {
         std::string       currpath;
         std::string       currval;
         Transaction      *m_transaction;
-        // need to store context - this is the same as at the xml_data
+        // need to store context - this is the same as in xml_data
         // need to stop parsing if the number of arguments reached the limit
         xmlParserCtxtPtr  parsing_ctx_arg;
 

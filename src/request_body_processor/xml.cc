@@ -79,7 +79,7 @@ class MSCSAXHandler {
             const std::shared_ptr<NodeData>& nd = xml_data->nodes[xml_data->nodes.size()-1];
             if (nd->has_child == true) {
                 // check the return value
-                // if it false, then stop parsing
+                // if false, then stop parsing
                 // this means the number of arguments reached the limit
                 if (xml_data->m_transaction->addArgument("XML", xml_data->currpath, xml_data->currval, 0) == false) {
                     xmlStopParser(xml_data->parsing_ctx_arg);

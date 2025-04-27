@@ -309,7 +309,7 @@ bool XML::complete(std::string *error) {
                 + std::to_string(m_data.well_formed) + ").");
 
             if (m_data.well_formed != 1) {
-                error->assign("XML: Failed parsing document.");
+                error->assign("XML: Failed to parse document.");
                 ms_dbg_a(m_transaction, 4, "XML: Failed to parse document.");
                 return false;
             }

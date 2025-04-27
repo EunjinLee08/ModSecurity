@@ -86,7 +86,7 @@ class MSCSAXHandler {
                 }
             }
             if (xml_data->currpath.length() > 0) {
-                // set an offset to store this is the first item or not -> remove the '.' or not
+                // set an offset to store whether this is the first item, in order to know whether to remove the '.'
                 int offset = (xml_data->nodes.size() > 1) ? 1 : 0;
                 xml_data->currpath.erase(xml_data->currpath.length() - (name.length()+offset));
             }

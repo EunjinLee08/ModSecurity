@@ -279,7 +279,7 @@ bool XML::processChunk(const char *buf, unsigned int size,
         xmlSetGenericErrorFunc(m_data.parsing_ctx_arg, null_error);
         xmlParseChunk(m_data.parsing_ctx_arg, buf, size, 0);
         if (m_data.parsing_ctx_arg->wellFormed != 1) {
-            error->assign("XML: Failed parsing document for ARGS.");
+            error->assign("XML: Failed to parse document for ARGS.");
             ms_dbg_a(m_transaction, 4, "XML: Failed parsing document for ARGS.");
             return false;
         }

@@ -295,7 +295,7 @@ bool XML::complete(std::string *error) {
         if (m_data.parsing_ctx != NULL &&
             m_transaction->m_secXMLParseXmlIntoArgs
             != RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs) {
-            /* This is how we signalise the end of parsing to libxml. */
+            /* This is how we signal the end of parsing to libxml. */
             xmlParseChunk(m_data.parsing_ctx, NULL, 0, 1);
 
             /* Preserve the results for our reference. */

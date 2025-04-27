@@ -65,7 +65,7 @@ class MSCSAXHandler {
                 exit(1);
             } */
             // if it's not the first (root) item, then append a '.'
-            // note, this can't occur because there is always a pseudo root element: 'xml'
+            // note, the condition should always be true because there is always a pseudo root element: 'xml'
             if (xml_data->nodes.size() > 1) {
                 xml_data->currpath.append(".");
                 xml_data->nodes[xml_data->nodes.size()-1]->has_child = true;

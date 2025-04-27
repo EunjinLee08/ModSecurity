@@ -225,8 +225,7 @@ class RulesSetProperties {
 
     /**
      *
-     * The ConfigBoolean enumerator consists in mapping the different
-     * states of the configuration boolean values.
+     * The ConfigBoolean enumerator the states for configuration boolean values.
      * The default value is PropertyNotSetConfigBoolean.
      */
     enum ConfigBoolean {

@@ -236,8 +236,8 @@ class RulesSetProperties {
 
     /**
      *
-     * The ConfigXMLParseXmlIntoArgs enumerator consists in mapping the
-     * different states of the configuration XMLParseXmlIntoArgs values.
+     * The ConfigXMLParseXmlIntoArgs enumerator defines the states for the configuration
+     * XMLParseXmlIntoArgs values.
      * The default value is PropertyNotSetConfigXMLParseXmlIntoArgs.
      */
     enum ConfigXMLParseXmlIntoArgs {

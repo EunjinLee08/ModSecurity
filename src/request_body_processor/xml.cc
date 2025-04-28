@@ -170,7 +170,7 @@ bool XML::init() {
         m_transaction->m_secXMLParseXmlIntoArgs
         == RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs) {
         ms_dbg_a(m_transaction, 9,
-                "XML: SecParseXMLIntoArgs is set to " \
+                "XML: SecParseXmlIntoArgs is set to " \
                 + RulesSetProperties::configXMLParseXmlIntoArgsString(static_cast<RulesSetProperties::ConfigXMLParseXmlIntoArgs>(m_transaction->m_secXMLParseXmlIntoArgs)));
         m_data.sax_handler = std::make_unique<xmlSAXHandler>();
         memset(m_data.sax_handler.get(), 0, sizeof(xmlSAXHandler));

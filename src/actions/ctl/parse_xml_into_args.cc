@@ -47,7 +47,7 @@ bool ParseXmlIntoArgs::init(std::string *error) {
 
 bool ParseXmlIntoArgs::evaluate(RuleWithActions *rule, Transaction *transaction) {
     std::stringstream a;
-    a << "Setting SecParseXMLIntoArgs to ";
+    a << "Setting SecParseXmlIntoArgs to ";
     a << modsecurity::RulesSetProperties::configXMLParseXmlIntoArgsString(m_secXMLParseXmlIntoArgs);
     a << " as requested by a ctl:parseXmlIntoArgs action";
 

@@ -54,6 +54,7 @@ class XMLNodes {
         unsigned long int node_depth;
         std::string       currpath;
         std::string       currval;
+        bool              currval_is_set;
         Transaction      *m_transaction;
         // need to store context - this is the same as in xml_data
         // need to stop parsing if the number of arguments reached the limit

@@ -42,6 +42,7 @@ XMLNodes::XMLNodes(Transaction *transaction)
     node_depth(0),
     currpath(""),
     currval(""),
+    currval_is_set(false),
     m_transaction(transaction)
     {}
 
@@ -68,20 +69,21 @@ class MSCSAXHandler {
             // note, the condition should always be true because there is always a pseudo root element: 'xml'
             if (xml_data->nodes.size() > 1) {
                 xml_data->currpath.append(".");
-                xml_data->nodes[xml_data->nodes.size()-1]->has_child = true;
+                xml_data->nodes[xml_data->nodes.size()-2]->has_child = true;
             }
             xml_data->currpath.append(name);
             // set the current value empty
             // this is necessary because if there is any text between the tags (new line, etc)
             // it will be added to the current value
             xml_data->currval = "";
+            xml_data->currval_is_set = false;
         }
 
         void onEndElement(void * ctx, const xmlChar *localname) {
             std::string name = reinterpret_cast<const char*>(localname);
             XMLNodes* xml_data = static_cast<XMLNodes*>(ctx);
             const std::shared_ptr<NodeData>& nd = xml_data->nodes[xml_data->nodes.size()-1];
-            if (nd->has_child == true) {
+            if (nd->has_child == false) {
                 // check the return value
                 // if false, then stop parsing
                 // this means the number of arguments reached the limit
@@ -97,6 +99,7 @@ class MSCSAXHandler {
             xml_data->nodes.pop_back();
             xml_data->node_depth--;
             xml_data->currval = "";
+            xml_data->currval_is_set = false;
         }
 
         void onCharacters(void *ctx, const xmlChar *ch, int len) {
@@ -106,7 +109,12 @@ class MSCSAXHandler {
             // libxml2 SAX parser will call this function multiple times
             // during the parsing of a single node, if the value has multibyte
             // characters, so we need to concatenate the values
-            xml_data->currval += content;
+            if (xml_data->currval_is_set == false) {
+                xml_data->currval = content;
+                xml_data->currval_is_set = true;
+            } else {
+                xml_data->currval += content;
+            }
         }
 };
 

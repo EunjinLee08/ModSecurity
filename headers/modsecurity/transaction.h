@@ -619,6 +619,7 @@ class Transaction : public TransactionAnchoredVariables, public TransactionSecMa
     RequestBodyProcessor::JSON *m_json;
 
     int m_secRuleEngine;
+    int m_secXMLParseXmlIntoArgs;
 
     std::string m_variableDuration;
     std::map<std::string, std::string> m_variableEnvs;

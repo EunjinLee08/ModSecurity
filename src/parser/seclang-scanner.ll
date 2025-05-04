@@ -90,6 +90,7 @@ ACTION_CTL_BDY_JSON                             (?i:ctl:requestBodyProcessor=JSO
 ACTION_CTL_BDY_XML                              (?i:ctl:requestBodyProcessor=XML)
 ACTION_CTL_BDY_URLENCODED                       (?i:ctl:requestBodyProcessor=URLENCODED)
 ACTION_CTL_FORCE_REQ_BODY_VAR                   (?i:ctl:forceRequestBodyVariable)
+ACTION_CTL_PARSE_XML_INTO_ARGS                  (?i:ctl:parseXmlIntoArgs)
 ACTION_CTL_REQUEST_BODY_ACCESS                  (?i:ctl:requestBodyAccess)
 ACTION_CTL_RULE_ENGINE                          (?i:ctl:ruleEngine)
 ACTION_CTL_RULE_REMOVE_BY_TAG                   (?i:ctl:ruleRemoveByTag)
@@ -400,6 +401,7 @@ CONFIG_VALUE_ABORT                      (?i:Abort)
 CONFIG_VALUE_DETC                       (?i:DetectionOnly)
 CONFIG_VALUE_HTTPS                      (?i:https)
 CONFIG_VALUE_NUMBER                     [0-9]+
+CONFIG_VALUE_ONLYARGS                   (?i:OnlyArgs)
 CONFIG_VALUE_OFF                        (?i:Off)
 CONFIG_VALUE_ON                         (?i:On)
 CONFIG_VALUE_PARALLEL                   (?i:Parallel|Concurrent)
@@ -410,6 +412,7 @@ CONFIG_VALUE_RELEVANT_ONLY              (?i:RelevantOnly)
 CONFIG_VALUE_SERIAL                     (?i:Serial)
 CONFIG_VALUE_WARN                       (?i:Warn)
 CONFIG_XML_EXTERNAL_ENTITY              (?i:SecXmlExternalEntity)
+CONFIG_XML_PARSE_XML_INTO_ARGS          (?i:SecParseXmlIntoArgs)
 CONGIG_DIR_RESPONSE_BODY_MP             (?i:SecResponseBodyMimeType)
 CONGIG_DIR_RESPONSE_BODY_MP_CLEAR       (?i:SecResponseBodyMimeTypesClear)
 CONGIG_DIR_SEC_ARG_SEP                  (?i:SecArgumentSeparator)
@@ -537,6 +540,7 @@ EQUALS_MINUS                            (?i:=\-)
 {ACTION_CTL_BDY_XML}                                                    { return p::make_ACTION_CTL_BDY_XML(yytext, *driver.loc.back()); }
 {ACTION_CTL_BDY_URLENCODED}                                             { return p::make_ACTION_CTL_BDY_URLENCODED(yytext, *driver.loc.back()); }
 {ACTION_CTL_FORCE_REQ_BODY_VAR}=                                        { return p::make_ACTION_CTL_FORCE_REQ_BODY_VAR(yytext, *driver.loc.back()); }
+{ACTION_CTL_PARSE_XML_INTO_ARGS}=                                       { return p::make_ACTION_CTL_PARSE_XML_INTO_ARGS(yytext, *driver.loc.back()); }
 {ACTION_CTL_REQUEST_BODY_ACCESS}=                                       { return p::make_ACTION_CTL_REQUEST_BODY_ACCESS(yytext, *driver.loc.back()); }
 {ACTION_CTL_RULE_ENGINE}=                                               { return p::make_ACTION_CTL_RULE_ENGINE(*driver.loc.back()); }
 {ACTION_CTL_RULE_REMOVE_BY_ID}[=]{REMOVE_RULE_BY}                       { return p::make_ACTION_CTL_RULE_REMOVE_BY_ID(yytext, *driver.loc.back()); }
@@ -609,6 +613,7 @@ EQUALS_MINUS                            (?i:=\-)
 {ACTION_LOG_DATA}:                                                      { BEGIN(EXPECTING_ACTION_PREDICATE); return p::make_ACTION_LOG_DATA(yytext, *driver.loc.back()); }
 
 {CONFIG_VALUE_DETC}                                                     { return p::make_CONFIG_VALUE_DETC(yytext, *driver.loc.back()); }
+{CONFIG_VALUE_ONLYARGS}                                                 { return p::make_CONFIG_VALUE_ONLYARGS(yytext, *driver.loc.back()); }
 {CONFIG_VALUE_OFF}                                                      { return p::make_CONFIG_VALUE_OFF(yytext, *driver.loc.back()); }
 {CONFIG_VALUE_ON}                                                       { return p::make_CONFIG_VALUE_ON(yytext, *driver.loc.back()); }
 {CONFIG_VALUE_RELEVANT_ONLY}                                            { return p::make_CONFIG_VALUE_RELEVANT_ONLY(yytext, *driver.loc.back()); }
@@ -805,6 +810,7 @@ EQUALS_MINUS                            (?i:=\-)
 {CONFIG_VALUE_ABORT}                                                    { return p::make_CONFIG_VALUE_ABORT(yytext, *driver.loc.back()); }
 {CONFIG_VALUE_DETC}                                                     { return p::make_CONFIG_VALUE_DETC(yytext, *driver.loc.back()); }
 {CONFIG_VALUE_HTTPS}                                                    { return p::make_CONFIG_VALUE_HTTPS(yytext, *driver.loc.back()); }
+{CONFIG_VALUE_ONLYARGS}                                                 { return p::make_CONFIG_VALUE_ONLYARGS(yytext, *driver.loc.back()); }
 {CONFIG_VALUE_OFF}                                                      { return p::make_CONFIG_VALUE_OFF(yytext, *driver.loc.back()); }
 {CONFIG_VALUE_ON}                                                       { return p::make_CONFIG_VALUE_ON(yytext, *driver.loc.back()); }
 {CONFIG_VALUE_PARALLEL}                                                 { return p::make_CONFIG_VALUE_PARALLEL(yytext, *driver.loc.back()); }
@@ -814,6 +820,7 @@ EQUALS_MINUS                            (?i:=\-)
 {CONFIG_VALUE_SERIAL}                                                   { return p::make_CONFIG_VALUE_SERIAL(yytext, *driver.loc.back()); }
 {CONFIG_VALUE_WARN}                                                     { return p::make_CONFIG_VALUE_WARN(yytext, *driver.loc.back()); }
 {CONFIG_XML_EXTERNAL_ENTITY}                                            { return p::make_CONFIG_XML_EXTERNAL_ENTITY(yytext, *driver.loc.back()); }
+{CONFIG_XML_PARSE_XML_INTO_ARGS}                                        { return p::make_CONFIG_XML_PARSE_XML_INTO_ARGS(yytext, *driver.loc.back()); }
 {CONGIG_DIR_RESPONSE_BODY_MP}[ \t]+{FREE_TEXT_NEW_LINE}                 { return p::make_CONGIG_DIR_RESPONSE_BODY_MP(strchr(yytext, ' ') + 1, *driver.loc.back()); }
 {CONGIG_DIR_RESPONSE_BODY_MP_CLEAR}                                     { return p::make_CONGIG_DIR_RESPONSE_BODY_MP_CLEAR(*driver.loc.back()); }
 {CONGIG_DIR_SEC_ARG_SEP}[ \t]+{FREE_TEXT_NEW_LINE}                      { return p::make_CONGIG_DIR_SEC_ARG_SEP(yytext, *driver.loc.back()); }

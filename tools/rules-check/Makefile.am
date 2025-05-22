@@ -26,7 +26,8 @@ modsec_rules_check_LDFLAGS = \
 	$(LMDB_LDFLAGS) \
 	$(LUA_LDFLAGS) \
 	$(SSDEEP_LDFLAGS) \
-	$(YAJL_LDFLAGS)
+	$(YAJL_LDFLAGS) \
+	$(LIBXML2_LDFLAGS)
 
 modsec_rules_check_CPPFLAGS = \
 	-I$(top_builddir)/headers \

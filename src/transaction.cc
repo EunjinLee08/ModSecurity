@@ -1601,6 +1601,7 @@ std::string Transaction::toJSON(int parts) {
             m_variableRequestMethod.evaluate()));
 
     LOGFY_ADD("http_version", m_httpVersion);
+    LOGFY_ADD("hostname", m_requestHostName);
     LOGFY_ADD("uri", this->m_uri);
 
     if (parts & audit_log::AuditLog::CAuditLogPart) {

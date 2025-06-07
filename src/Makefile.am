@@ -68,21 +68,21 @@ libmodsecurity_includesub_actions_HEADERS = \
 
 
 noinst_HEADERS = \
-	actions/*.h \
-	actions/ctl/*.h \
-	actions/data/*.h \
-	actions/disruptive/*.h \
-	actions/transformations/*.h \
-	debug_log/*.h \
-	audit_log/writer/*.h \
-	collection/backend/*.h \
-	operators/*.h \
-	parser/*.h \
-	request_body_processor/*.h \
-	utils/*.h \
-	variables/*.h \
-	engine/*.h \
-	*.h
+	$(wildcard actions/*.h) \
+	$(wildcard actions/ctl/*.h) \
+	$(wildcard actions/data/*.h) \
+	$(wildcard actions/disruptive/*.h) \
+	$(wildcard actions/transformations/*.h) \
+	$(wildcard debug_log/*.h) \
+	$(wildcard audit_log/writer/*.h) \
+	$(wildcard collection/backend/*.h) \
+	$(wildcard operators/*.h) \
+	$(wildcard parser/*.h) \
+	$(wildcard request_body_processor/*.h) \
+	$(wildcard utils/*.h) \
+	$(wildcard variables/*.h) \
+	$(wildcard engine/*.h) \
+	$(wildcard *.h)
 
 
 ENGINES = \
@@ -308,13 +308,14 @@ libmodsecurity_la_CFLAGS =
 
 
 libmodsecurity_la_CPPFLAGS = \
-	-I.. \
+	-I$(top_srcdir) \
+	-I$(top_builddir) \
 	-g \
-	-I../others \
-	-I../others/mbedtls/include \
+	-I$(top_srcdir)/others \
+	-I$(top_srcdir)/others/mbedtls/include \
 	-fPIC \
 	-O3 \
-	-I../headers \
+	-I$(top_srcdir)/headers \
 	$(CURL_CFLAGS) \
 	$(GEOIP_CFLAGS) \
 	$(GLOBAL_CPPFLAGS) \

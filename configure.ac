@@ -42,7 +42,7 @@ AC_PREFIX_DEFAULT([/usr/local/modsecurity])
 
 
 # General automake options.
-AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
+AM_INIT_AUTOMAKE([-Wall foreign subdir-objects])
 
 
 # Check for dependencies (C++, AR, Lex, Yacc and Make)

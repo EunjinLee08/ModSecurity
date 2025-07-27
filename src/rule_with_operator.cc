@@ -90,17 +90,6 @@ void RuleWithOperator::updateMatchedVars(Transaction *trans, const std::string &
 }
 
 
-void RuleWithOperator::cleanMatchedVars(Transaction *trans) {
-    ms_dbg_a(trans, 9, "Matched vars cleaned.");
-    // cppcheck-suppress ctunullpointer
-    trans->m_variableMatchedVar.unset();
-    trans->m_variableMatchedVars.unset();
-    trans->m_variableMatchedVarName.unset();
-    trans->m_variableMatchedVarsNames.unset();
-}
-
-
-
 bool RuleWithOperator::executeOperatorAt(Transaction *trans, const std::string &key,
     const std::string &value, RuleMessage &ruleMessage) {
 #if MSC_EXEC_CLOCK_ENABLED
@@ -324,7 +313,6 @@ bool RuleWithOperator::evaluate(Transaction *trans,
 
     if (globalRet == false) {
         ms_dbg_a(trans, 4, "Rule returned 0.");
-        cleanMatchedVars(trans);
         goto end_clean;
     }
     ms_dbg_a(trans, 4, "Rule returned 1.");

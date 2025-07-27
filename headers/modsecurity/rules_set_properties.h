@@ -196,22 +196,6 @@ protected:
     }
 };
 
-class ConfigDouble {
- public:
-    bool m_set = false;
-    double m_value = 0.0;
-    ConfigDouble() = default;
-
-    void merge(const ConfigDouble *from) {
-        if (m_set == true || from->m_set == false) {
-            return;
-        }
-        m_set = true;
-        m_value = from->m_value;
-        return;
-    }
-};
-
 
 class ConfigString {
  public:

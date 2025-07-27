@@ -88,7 +88,9 @@ public:
     ConfigValue() = default;
 
     void merge(const ConfigValue<T>* from) {
-        if (m_set || !from->m_set) return;
+        if (m_set || !from->m_set) {
+            return;
+        }
         m_set = true;
         m_value = from->m_value;
     }

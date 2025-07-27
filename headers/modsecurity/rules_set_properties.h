@@ -130,10 +130,10 @@ public:
         }
 
         if (
-            // first condition will be true if the value is bigger than int64/uint64 max value
-            // the second condition checks if the value is fit as int64/uint64, but not fit for
-            // designed type, eg. uint32; in that case the errno will be 0, but
-            // we must check the value is not bigger than the given max() at the type class
+            // The first condition will be true when the value is bigger than int64/uint64 maximum value.
+            // The second condition checks whether the value fits into int64/uint64, but not
+            // into the designed type, e.g., uint32; in that case the errno will be 0, but
+            // we must check the value is not bigger than the defined maximum of the class.
             (errno == ERANGE && val == std::numeric_limits<LimitSigned>::max())
             ||
             (val > static_cast<LimitSigned>(maxValue()))

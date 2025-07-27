@@ -125,7 +125,7 @@ public:
         catch (...) { // NOSONAR
             // we don't need to handle all exceptions, the engine's BISON parser
             // does not allow other symbols than numbers
-            set_error(errmsg, "An unknown error occurred while parsed the value.");
+            set_error(errmsg, "An unknown error occurred while parsing number.");
             return false;
         }
 

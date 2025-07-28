@@ -166,7 +166,9 @@ protected:
 
 private:
     static inline void set_error(std::string* err, const char* msg) {
-        if (err) *err = msg;
+        if (err) {
+            *err = msg;
+        }
     }
 };
 

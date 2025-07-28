@@ -226,7 +226,7 @@ static void acmp_build_binary_tree(ACMP *parser, acmp_node_t *node) {
 
     /* We have array with all children of the node and number of those children
      */
-    for (i = 0; i < count - 1; i++)
+    for (i = 0; i < count - 1; i++) {
         for (j = i + 1; j < count; j++) {
             acmp_node_t *tmp;
 
@@ -236,6 +236,7 @@ static void acmp_build_binary_tree(ACMP *parser, acmp_node_t *node) {
             nodes[i] = nodes[j];
             nodes[j] = tmp;
         }
+    }       
     if (node->btree != NULL) {
         free(node->btree);
         node->btree = NULL;

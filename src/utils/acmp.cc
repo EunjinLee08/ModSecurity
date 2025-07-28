@@ -236,10 +236,10 @@ static void acmp_build_binary_tree(ACMP *parser, acmp_node_t *node) {
             nodes[i] = nodes[j];
             nodes[j] = tmp;
         }
-        if (node->btree != NULL) {
-            free(node->btree);
-            node->btree = NULL;
-        }
+    if (node->btree != NULL) {
+        free(node->btree);
+        node->btree = NULL;
+    }
     node->btree = reinterpret_cast<acmp_btree_node_t *>(calloc(1, sizeof(acmp_btree_node_t)));
 
     /* ENH: Check alloc succeded */

@@ -405,7 +405,7 @@ CONFIG_VALUE_ONLYARGS                   (?i:OnlyArgs)
 CONFIG_VALUE_OFF                        (?i:Off)
 CONFIG_VALUE_ON                         (?i:On)
 CONFIG_VALUE_PARALLEL                   (?i:Parallel|Concurrent)
-CONFIG_VALUE_PATH                       [0-9A-Za-z_\/\.\-\*\:]+
+CONFIG_VALUE_PATH                       [0-9A-Za-z_\/\.\-\*\: \\\(\)]+
 CONFIG_VALUE_PROCESS_PARTIAL            (?i:ProcessPartial)
 CONFIG_VALUE_REJECT                     (?i:Reject)
 CONFIG_VALUE_RELEVANT_ONLY              (?i:RelevantOnly)

@@ -1452,7 +1452,7 @@ std::string Transaction::toOldAuditLogFormatIndex(const std::string &filename,
 
 
 std::string Transaction::toOldAuditLogFormat(int parts,
-    const std::string &trailer) {
+    const std::string &trailer, const std::string &header) {
     std::stringstream audit_log;
 
     struct tm timeinfo;
@@ -1461,7 +1461,8 @@ std::string Transaction::toOldAuditLogFormat(int parts,
     char tstr[std::size("[dd/Mmm/yyyy:hh:mm:ss shhmm]")];
     strftime(tstr, std::size(tstr), "[%d/%b/%Y:%H:%M:%S %z]", &timeinfo);
 
-    audit_log << "--" << trailer << "-" << "A--" << std::endl;
+    audit_log << header << "--" << trailer << "-" << "A--" << std::endl;
+    audit_log << header;
     audit_log << tstr;
     audit_log << " " << m_id;
     audit_log << " " << this->m_clientIpAddress;
@@ -1472,7 +1473,8 @@ std::string Transaction::toOldAuditLogFormat(int parts,
 
     if (parts & audit_log::AuditLog::BAuditLogPart) {
         std::vector<const VariableValue *> l;
-        audit_log << "--" << trailer << "-" << "B--" << std::endl;
+        audit_log << header << "--" << trailer << "-" << "B--" << std::endl;
+        audit_log << header;
         audit_log << utils::string::dash_if_empty(
             m_variableRequestMethod.evaluate());
         audit_log << " " << this->m_uri.c_str() << " " << "HTTP/";
@@ -1481,79 +1483,81 @@ std::string Transaction::toOldAuditLogFormat(int parts,
         m_variableRequestHeaders.resolve(&l);
         for (auto &h : l) {
             size_t pos = strlen("REQUEST_HEADERS:");
+            audit_log << header;
             audit_log << h->getKeyWithCollection().c_str() + pos << ": ";
             audit_log << h->getValue().c_str() << std::endl;
             delete h;
         }
-        audit_log << std::endl;
+        audit_log << header << std::endl;
     }
     if (parts & audit_log::AuditLog::CAuditLogPart
         &&  m_requestBody.tellp() > 0) {
         std::string body =  m_requestBody.str();
-        audit_log << "--" << trailer << "-" << "C--" << std::endl;
+        audit_log << header << "--" << trailer << "-" << "C--" << std::endl;
         if (body.size() > 0) {
-            audit_log << body << std::endl;
+            audit_log << header << body << std::endl;
         }
-        audit_log << std::endl;
+        audit_log << header << std::endl;
     }
     if (parts & audit_log::AuditLog::DAuditLogPart) {
-        audit_log << "--" << trailer << "-" << "D--" << std::endl;
-        audit_log << std::endl;
+        audit_log << header << "--" << trailer << "-" << "D--" << std::endl;
+        audit_log << header << std::endl;
         /** TODO: write audit_log D part. */
     }
     if (parts & audit_log::AuditLog::EAuditLogPart
         && m_responseBody.tellp() > 0) {
         std::string body = utils::string::toHexIfNeeded(m_responseBody.str());
-        audit_log << "--" << trailer << "-" << "E--" << std::endl;
+        audit_log << header << "--" << trailer << "-" << "E--" << std::endl;
         if (body.size() > 0) {
-            audit_log << body << std::endl;
+            audit_log << header << body << std::endl;
         }
-        audit_log << std::endl;
+        audit_log << header << std::endl;
     }
     if (parts & audit_log::AuditLog::FAuditLogPart) {
         std::vector<const VariableValue *> l;
 
-        audit_log << "--" << trailer << "-" << "F--" << std::endl;
-        audit_log << "HTTP/" << m_httpVersion.c_str()  << " ";
+        audit_log << header << "--" << trailer << "-" << "F--" << std::endl;
+        audit_log << header << "HTTP/" << m_httpVersion.c_str()  << " ";
         audit_log << this->m_httpCodeReturned << std::endl;
         m_variableResponseHeaders.resolve(&l);
         for (auto &h : l) {
+            audit_log << header;
             audit_log << h->getKey().c_str() << ": ";
             audit_log << h->getValue().c_str() << std::endl;
             delete h;
         }
     }
-    audit_log << std::endl;
+    audit_log << header << std::endl;
 
     if (parts & audit_log::AuditLog::GAuditLogPart) {
-        audit_log << "--" << trailer << "-" << "G--" << std::endl;
+        audit_log << header << "--" << trailer << "-" << "G--" << std::endl;
         audit_log << std::endl;
         /** TODO: write audit_log G part. */
     }
     if (parts & audit_log::AuditLog::HAuditLogPart) {
-        audit_log << "--" << trailer << "-" << "H--" << std::endl;
+        audit_log << header << "--" << trailer << "-" << "H--" << std::endl;
         for (const auto &a : m_rulesMessages) {
-            audit_log << a.log(0, m_httpCodeReturned) << std::endl;
+            audit_log << header << a.log(0, m_httpCodeReturned) << std::endl;
         }
-        audit_log << std::endl;
+        audit_log << header << std::endl;
         /** TODO: write audit_log H part. */
     }
     if (parts & audit_log::AuditLog::IAuditLogPart) {
-        audit_log << "--" << trailer << "-" << "I--" << std::endl;
-        audit_log << std::endl;
+        audit_log << header << "--" << trailer << "-" << "I--" << std::endl;
+        audit_log << header << std::endl;
         /** TODO: write audit_log I part. */
     }
     if (parts & audit_log::AuditLog::JAuditLogPart) {
-        audit_log << "--" << trailer << "-" << "J--" << std::endl;
-        audit_log << std::endl;
+        audit_log << header << "--" << trailer << "-" << "J--" << std::endl;
+        audit_log << header << std::endl;
         /** TODO: write audit_log J part. */
     }
     if (parts & audit_log::AuditLog::KAuditLogPart) {
-        audit_log << "--" << trailer << "-" << "K--" << std::endl;
-        audit_log << std::endl;
+        audit_log << header << "--" << trailer << "-" << "K--" << std::endl;
+        audit_log << header << std::endl;
         /** TODO: write audit_log K part. */
     }
-    audit_log << "--" << trailer << "-" << "Z--" << std::endl << std::endl;
+    audit_log << header << "--" << trailer << "-" << "Z--" << std::endl << std::endl;
 
     return audit_log.str();
 }

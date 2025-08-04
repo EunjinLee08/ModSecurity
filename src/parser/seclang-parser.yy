@@ -595,6 +595,7 @@ using namespace modsecurity::operators;
   CONFIG_DIR_AUDIT_LOG2                        "CONFIG_DIR_AUDIT_LOG2"
   CONFIG_DIR_AUDIT_LOG_P                       "CONFIG_DIR_AUDIT_LOG_P"
   CONFIG_DIR_AUDIT_STS                         "CONFIG_DIR_AUDIT_STS"
+  CONFIG_DIR_AUDIT_LOG_HEAD                    "CONFIG_DIR_AUDIT_LOG_HEAD"
   CONFIG_DIR_AUDIT_TPE                         "CONFIG_DIR_AUDIT_TPE"
   CONFIG_DIR_DEBUG_LOG                         "CONFIG_DIR_DEBUG_LOG"
   CONFIG_DIR_DEBUG_LVL                         "CONFIG_DIR_DEBUG_LVL"
@@ -799,6 +800,13 @@ audit_log:
       {
         std::string relevant_status($1);
         driver.m_auditLog->setRelevantStatus(relevant_status);
+      }
+
+    /* SecAuditLogHeader */
+    | CONFIG_DIR_AUDIT_LOG_HEAD
+      {
+        std::string header($1);
+        driver.m_auditLog->setHeader(header);
       }
 
     /* SecAuditLogType */

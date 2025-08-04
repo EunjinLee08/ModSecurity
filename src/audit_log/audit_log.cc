@@ -55,6 +55,7 @@ AuditLog::AuditLog()
     : m_path1(""),
     m_path2(""),
     m_storage_dir(""),
+    m_header(""),
     m_format(NotSetAuditLogFormat),
     m_parts(-1),
     m_filePermission(-1),
@@ -131,6 +132,13 @@ bool AuditLog::setFilePath2(const std::basic_string<char>& path) {
     return true;
 }
 
+
+bool AuditLog::setHeader(const std::basic_string<char>& header) {
+    this->m_header = header;
+    return true;
+}
+
+
 bool AuditLog::setFormat(AuditLogFormat fmt) {
     this->m_format = fmt;
     return true;
@@ -206,7 +214,6 @@ bool AuditLog::setType(AuditLogType audit_type) {
     this->m_type = audit_type;
     return true;
 }
-
 
 
 bool AuditLog::init(std::string *error) {
@@ -337,6 +344,7 @@ bool AuditLog::merge(AuditLog *from, std::string *error) {
     AL_MERGE_STRING_CONF(from->m_path2, m_path2);
     AL_MERGE_STRING_CONF(from->m_storage_dir, m_storage_dir);
     AL_MERGE_STRING_CONF(from->m_relevant, m_relevant);
+    AL_MERGE_STRING_CONF(from->m_header, m_header);
 
     if (from->m_filePermission != -1) {
         m_filePermission = from->m_filePermission;

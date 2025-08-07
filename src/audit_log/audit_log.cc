@@ -51,13 +51,13 @@ namespace modsecurity {
 namespace audit_log {
 
 
-AuditLog::AuditLog() { }
+AuditLog::AuditLog() = default;
 
 
 AuditLog::~AuditLog() {
     if (m_writer) {
         delete m_writer;
-        m_writer = NULL;
+        m_writer = nullptr;
     }
 }
 
@@ -210,7 +210,7 @@ bool AuditLog::init(std::string *error) {
         && !m_ctlAuditEngineActive) {
         if (m_writer) {
             delete m_writer;
-            m_writer = NULL;
+            m_writer = nullptr;
         }
         return true;
     }
@@ -228,7 +228,7 @@ bool AuditLog::init(std::string *error) {
         tmp_writer = new audit_log::writer::Serial(this);
     }
 
-    if (tmp_writer == NULL) {
+    if (tmp_writer == nullptr) {
         error->assign("Writer memory alloc failed!");
         return false;
     }
@@ -306,7 +306,7 @@ bool AuditLog::saveIfRelevant(Transaction *transaction, int parts) {
     }
     ms_dbg_a(transaction, 5, "Saving this request as part " \
             "of the audit logs.");
-    if (m_writer == NULL) {
+    if (m_writer == nullptr) {
         ms_dbg_a(transaction, 1, "Internal error, audit log writer is null");
     } else {
         std::string error;

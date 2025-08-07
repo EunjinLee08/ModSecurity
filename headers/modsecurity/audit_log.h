@@ -207,7 +207,7 @@ class AuditLog {
     AuditLogType m_type = NotSetAuditLogType;
     std::string m_relevant = std::string("");
 
-    audit_log::writer::Writer *m_writer = NULL;
+    audit_log::writer::Writer *m_writer = nullptr;
     bool m_ctlAuditEngineActive = false; // rules have at least one action On or RelevantOnly
 };
 

@@ -183,32 +183,32 @@ class AuditLog {
 
     bool merge(AuditLog *from, std::string *error);
 
-    std::string m_path1;
-    std::string m_path2;
-    std::string m_storage_dir;
-    std::string m_header;
+    std::string m_path1 = std::string("");
+    std::string m_path2 = std::string("");
+    std::string m_storage_dir = std::string("");
+    std::string m_header = std::string("");
 
-    AuditLogFormat m_format;
+    AuditLogFormat m_format = NotSetAuditLogFormat;
 
  protected:
-    int m_parts;
+    int m_parts = -1;
     int m_defaultParts = AAuditLogPart | BAuditLogPart | CAuditLogPart
         | FAuditLogPart | HAuditLogPart | ZAuditLogPart;
 
-    int m_filePermission;
+    int m_filePermission = -1;
     int m_defaultFilePermission = 0640;
 
-    int m_directoryPermission;
+    int m_directoryPermission = -1;
     int m_defaultDirectoryPermission = 0750;
 
  private:
-    AuditLogStatus m_status;
+    AuditLogStatus m_status = NotSetLogStatus;
 
-    AuditLogType m_type;
-    std::string m_relevant;
+    AuditLogType m_type = NotSetAuditLogType;
+    std::string m_relevant = std::string("");
 
-    audit_log::writer::Writer *m_writer;
-    bool m_ctlAuditEngineActive; // rules have at least one action On or RelevantOnly
+    audit_log::writer::Writer *m_writer = NULL;
+    bool m_ctlAuditEngineActive = false; // rules have at least one action On or RelevantOnly
 };
 
 

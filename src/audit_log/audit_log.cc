@@ -51,20 +51,7 @@ namespace modsecurity {
 namespace audit_log {
 
 
-AuditLog::AuditLog()
-    : m_path1(""),
-    m_path2(""),
-    m_storage_dir(""),
-    m_header(""),
-    m_format(NotSetAuditLogFormat),
-    m_parts(-1),
-    m_filePermission(-1),
-    m_directoryPermission(-1),
-    m_status(NotSetLogStatus),
-    m_type(NotSetAuditLogType),
-    m_relevant(""),
-    m_writer(NULL),
-    m_ctlAuditEngineActive(false) { }
+AuditLog::AuditLog() { }
 
 
 AuditLog::~AuditLog() {

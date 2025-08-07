@@ -153,18 +153,18 @@ class AuditLog {
     bool setStorageDirMode(int permission);
     bool setFileMode(int permission);
     bool setStatus(AuditLogStatus new_status);
-    bool setRelevantStatus(const std::basic_string<char>& new_relevant_status);
-    bool setFilePath1(const std::basic_string<char>& path);
-    bool setFilePath2(const std::basic_string<char>& path);
-    bool setStorageDir(const std::basic_string<char>& path);
-    bool setHeader(const std::basic_string<char>& header);
+    bool setRelevantStatus(std::string_view new_relevant_status);
+    bool setFilePath1(std::string_view path);
+    bool setFilePath2(std::string_view path);
+    bool setStorageDir(std::string_view path);
+    bool setHeader(std::string_view header);
     bool setFormat(AuditLogFormat fmt);
 
     int getDirectoryPermission() const;
     int getFilePermission() const;
     int getParts() const;
 
-    bool setParts(const std::basic_string<char>& new_parts);
+    bool setParts(std::string_view new_parts);
     bool setType(AuditLogType audit_type);
 
     bool init(std::string *error);
@@ -174,8 +174,8 @@ class AuditLog {
     bool saveIfRelevant(Transaction *transaction, int parts);
     bool isRelevant(int status);
 
-    static int addParts(int parts, const std::string& new_parts);
-    static int removeParts(int parts, const std::string& new_parts);
+    static int addParts(int parts, std::string_view new_parts);
+    static int removeParts(int parts, std::string_view new_parts);
 
     void setCtlAuditEngineActive() {
         m_ctlAuditEngineActive = true;

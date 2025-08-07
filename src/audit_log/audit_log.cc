@@ -109,31 +109,31 @@ bool AuditLog::setStatus(AuditLogStatus status) {
 }
 
 
-bool AuditLog::setRelevantStatus(const std::basic_string<char>& status) {
+bool AuditLog::setRelevantStatus(std::string_view status) {
     this->m_relevant = std::string(status);
     return true;
 }
 
 
-bool AuditLog::setStorageDir(const std::basic_string<char>& path) {
+bool AuditLog::setStorageDir(std::string_view path) {
     this->m_storage_dir = path;
     return true;
 }
 
 
-bool AuditLog::setFilePath1(const std::basic_string<char>& path) {
+bool AuditLog::setFilePath1(std::string_view path) {
     this->m_path1 = path;
     return true;
 }
 
 
-bool AuditLog::setFilePath2(const std::basic_string<char>& path) {
+bool AuditLog::setFilePath2(std::string_view path) {
     this->m_path2 = path;
     return true;
 }
 
 
-bool AuditLog::setHeader(const std::basic_string<char>& header) {
+bool AuditLog::setHeader(std::string_view header) {
     this->m_header = header;
     return true;
 }
@@ -144,7 +144,7 @@ bool AuditLog::setFormat(AuditLogFormat fmt) {
     return true;
 }
 
-int AuditLog::addParts(int parts, const std::string& new_parts) {
+int AuditLog::addParts(int parts, std::string_view new_parts) {
     PARTS_CONSTAINS('A', AAuditLogPart)
     PARTS_CONSTAINS('B', BAuditLogPart)
     PARTS_CONSTAINS('C', CAuditLogPart)
@@ -162,7 +162,7 @@ int AuditLog::addParts(int parts, const std::string& new_parts) {
 }
 
 
-int AuditLog::removeParts(int parts, const std::string& new_parts) {
+int AuditLog::removeParts(int parts, std::string_view new_parts) {
     PARTS_CONSTAINS_REM('A', AAuditLogPart)
     PARTS_CONSTAINS_REM('B', BAuditLogPart)
     PARTS_CONSTAINS_REM('C', CAuditLogPart)
@@ -180,7 +180,7 @@ int AuditLog::removeParts(int parts, const std::string& new_parts) {
 }
 
 
-bool AuditLog::setParts(const std::basic_string<char>& new_parts) {
+bool AuditLog::setParts(std::string_view new_parts) {
     int parts = 0;
 
     PARTS_CONSTAINS('A', AAuditLogPart)

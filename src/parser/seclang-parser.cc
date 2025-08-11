@@ -311,7 +311,7 @@ namespace yy {
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG2: // "CONFIG_DIR_AUDIT_LOG2"
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_P: // "CONFIG_DIR_AUDIT_LOG_P"
       case symbol_kind::S_CONFIG_DIR_AUDIT_STS: // "CONFIG_DIR_AUDIT_STS"
-      case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_HEAD: // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      case symbol_kind::S_CONFIG_DIR_AUDIT_PREFIX: // "CONFIG_DIR_AUDIT_PREFIX"
       case symbol_kind::S_CONFIG_DIR_AUDIT_TPE: // "CONFIG_DIR_AUDIT_TPE"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LOG: // "CONFIG_DIR_DEBUG_LOG"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LVL: // "CONFIG_DIR_DEBUG_LVL"
@@ -561,7 +561,7 @@ namespace yy {
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG2: // "CONFIG_DIR_AUDIT_LOG2"
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_P: // "CONFIG_DIR_AUDIT_LOG_P"
       case symbol_kind::S_CONFIG_DIR_AUDIT_STS: // "CONFIG_DIR_AUDIT_STS"
-      case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_HEAD: // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      case symbol_kind::S_CONFIG_DIR_AUDIT_PREFIX: // "CONFIG_DIR_AUDIT_PREFIX"
       case symbol_kind::S_CONFIG_DIR_AUDIT_TPE: // "CONFIG_DIR_AUDIT_TPE"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LOG: // "CONFIG_DIR_DEBUG_LOG"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LVL: // "CONFIG_DIR_DEBUG_LVL"
@@ -811,7 +811,7 @@ namespace yy {
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG2: // "CONFIG_DIR_AUDIT_LOG2"
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_P: // "CONFIG_DIR_AUDIT_LOG_P"
       case symbol_kind::S_CONFIG_DIR_AUDIT_STS: // "CONFIG_DIR_AUDIT_STS"
-      case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_HEAD: // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      case symbol_kind::S_CONFIG_DIR_AUDIT_PREFIX: // "CONFIG_DIR_AUDIT_PREFIX"
       case symbol_kind::S_CONFIG_DIR_AUDIT_TPE: // "CONFIG_DIR_AUDIT_TPE"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LOG: // "CONFIG_DIR_DEBUG_LOG"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LVL: // "CONFIG_DIR_DEBUG_LVL"
@@ -1060,7 +1060,7 @@ namespace yy {
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG2: // "CONFIG_DIR_AUDIT_LOG2"
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_P: // "CONFIG_DIR_AUDIT_LOG_P"
       case symbol_kind::S_CONFIG_DIR_AUDIT_STS: // "CONFIG_DIR_AUDIT_STS"
-      case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_HEAD: // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      case symbol_kind::S_CONFIG_DIR_AUDIT_PREFIX: // "CONFIG_DIR_AUDIT_PREFIX"
       case symbol_kind::S_CONFIG_DIR_AUDIT_TPE: // "CONFIG_DIR_AUDIT_TPE"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LOG: // "CONFIG_DIR_DEBUG_LOG"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LVL: // "CONFIG_DIR_DEBUG_LVL"
@@ -1565,7 +1565,7 @@ namespace yy {
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG2: // "CONFIG_DIR_AUDIT_LOG2"
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_P: // "CONFIG_DIR_AUDIT_LOG_P"
       case symbol_kind::S_CONFIG_DIR_AUDIT_STS: // "CONFIG_DIR_AUDIT_STS"
-      case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_HEAD: // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      case symbol_kind::S_CONFIG_DIR_AUDIT_PREFIX: // "CONFIG_DIR_AUDIT_PREFIX"
       case symbol_kind::S_CONFIG_DIR_AUDIT_TPE: // "CONFIG_DIR_AUDIT_TPE"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LOG: // "CONFIG_DIR_DEBUG_LOG"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LVL: // "CONFIG_DIR_DEBUG_LVL"
@@ -1820,11 +1820,11 @@ namespace yy {
 #line 1821 "seclang-parser.cc"
     break;
 
-  case 18: // audit_log: "CONFIG_DIR_AUDIT_LOG_HEAD"
+  case 18: // audit_log: "CONFIG_DIR_AUDIT_PREFIX"
 #line 807 "seclang-parser.yy"
       {
-        std::string header(yystack_[0].value.as < std::string > ());
-        driver.m_auditLog->setHeader(header);
+        std::string prefix(yystack_[0].value.as < std::string > ());
+        driver.m_auditLog->setPrefix(prefix);
       }
 #line 1830 "seclang-parser.cc"
     break;
@@ -7272,7 +7272,7 @@ namespace yy {
   "\"CONFIG_DIR_AUDIT_DIR_MOD\"", "\"CONFIG_DIR_AUDIT_ENG\"",
   "\"CONFIG_DIR_AUDIT_FLE_MOD\"", "\"CONFIG_DIR_AUDIT_LOG\"",
   "\"CONFIG_DIR_AUDIT_LOG2\"", "\"CONFIG_DIR_AUDIT_LOG_P\"",
-  "\"CONFIG_DIR_AUDIT_STS\"", "\"CONFIG_DIR_AUDIT_LOG_HEAD\"",
+  "\"CONFIG_DIR_AUDIT_STS\"", "\"CONFIG_DIR_AUDIT_PREFIX\"",
   "\"CONFIG_DIR_AUDIT_TPE\"", "\"CONFIG_DIR_DEBUG_LOG\"",
   "\"CONFIG_DIR_DEBUG_LVL\"", "\"CONFIG_SEC_CACHE_TRANSFORMATIONS\"",
   "\"CONFIG_SEC_DISABLE_BACKEND_COMPRESS\"", "\"CONFIG_SEC_HASH_ENGINE\"",

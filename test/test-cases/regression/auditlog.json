@@ -482,7 +482,7 @@
     "enabled": 1,
     "version_min": 300000,
     "version_max": 0,
-    "title": "auditlog : SecAuditLogHeader",
+    "title": "auditlog : SecAuditLogPrefix",
     "client": {
       "ip": "200.249.12.31",
       "port": 2313
@@ -527,10 +527,10 @@
       "SecRuleEngine On",
       "SecRule ARGS \"@contains test\" \"id:1,t:trim,deny,auditlog\"",
       "SecAuditEngine RelevantOnly",
-      "SecAuditLogHeader \"[audit.log]: \"",
+      "SecAuditLogPrefix \"[audit.log]: \"",
       "SecAuditLogParts ABCFHZ",
       "SecAuditLogStorageDir /tmp/test",
-      "SecAuditLog /tmp/audit_test_header.log",
+      "SecAuditLog /tmp/audit_test_prefix.log",
       "SecAuditLogDirMode 0766",
       "SecAuditLogFileMode 0600",
       "SecAuditLogType Serial",

@@ -820,7 +820,7 @@ namespace yy {
       // "CONFIG_DIR_AUDIT_LOG2"
       // "CONFIG_DIR_AUDIT_LOG_P"
       // "CONFIG_DIR_AUDIT_STS"
-      // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      // "CONFIG_DIR_AUDIT_PREFIX"
       // "CONFIG_DIR_AUDIT_TPE"
       // "CONFIG_DIR_DEBUG_LOG"
       // "CONFIG_DIR_DEBUG_LVL"
@@ -1245,7 +1245,7 @@ namespace yy {
     TOK_CONFIG_DIR_AUDIT_LOG2 = 506, // "CONFIG_DIR_AUDIT_LOG2"
     TOK_CONFIG_DIR_AUDIT_LOG_P = 507, // "CONFIG_DIR_AUDIT_LOG_P"
     TOK_CONFIG_DIR_AUDIT_STS = 508, // "CONFIG_DIR_AUDIT_STS"
-    TOK_CONFIG_DIR_AUDIT_LOG_HEAD = 509, // "CONFIG_DIR_AUDIT_LOG_HEAD"
+    TOK_CONFIG_DIR_AUDIT_PREFIX = 509, // "CONFIG_DIR_AUDIT_PREFIX"
     TOK_CONFIG_DIR_AUDIT_TPE = 510, // "CONFIG_DIR_AUDIT_TPE"
     TOK_CONFIG_DIR_DEBUG_LOG = 511, // "CONFIG_DIR_DEBUG_LOG"
     TOK_CONFIG_DIR_DEBUG_LVL = 512, // "CONFIG_DIR_DEBUG_LVL"
@@ -1615,7 +1615,7 @@ namespace yy {
         S_CONFIG_DIR_AUDIT_LOG2 = 251,           // "CONFIG_DIR_AUDIT_LOG2"
         S_CONFIG_DIR_AUDIT_LOG_P = 252,          // "CONFIG_DIR_AUDIT_LOG_P"
         S_CONFIG_DIR_AUDIT_STS = 253,            // "CONFIG_DIR_AUDIT_STS"
-        S_CONFIG_DIR_AUDIT_LOG_HEAD = 254,       // "CONFIG_DIR_AUDIT_LOG_HEAD"
+        S_CONFIG_DIR_AUDIT_PREFIX = 254,         // "CONFIG_DIR_AUDIT_PREFIX"
         S_CONFIG_DIR_AUDIT_TPE = 255,            // "CONFIG_DIR_AUDIT_TPE"
         S_CONFIG_DIR_DEBUG_LOG = 256,            // "CONFIG_DIR_DEBUG_LOG"
         S_CONFIG_DIR_DEBUG_LVL = 257,            // "CONFIG_DIR_DEBUG_LVL"
@@ -1870,7 +1870,7 @@ namespace yy {
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG2: // "CONFIG_DIR_AUDIT_LOG2"
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_P: // "CONFIG_DIR_AUDIT_LOG_P"
       case symbol_kind::S_CONFIG_DIR_AUDIT_STS: // "CONFIG_DIR_AUDIT_STS"
-      case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_HEAD: // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      case symbol_kind::S_CONFIG_DIR_AUDIT_PREFIX: // "CONFIG_DIR_AUDIT_PREFIX"
       case symbol_kind::S_CONFIG_DIR_AUDIT_TPE: // "CONFIG_DIR_AUDIT_TPE"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LOG: // "CONFIG_DIR_DEBUG_LOG"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LVL: // "CONFIG_DIR_DEBUG_LVL"
@@ -2250,7 +2250,7 @@ switch (yykind)
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG2: // "CONFIG_DIR_AUDIT_LOG2"
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_P: // "CONFIG_DIR_AUDIT_LOG_P"
       case symbol_kind::S_CONFIG_DIR_AUDIT_STS: // "CONFIG_DIR_AUDIT_STS"
-      case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_HEAD: // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      case symbol_kind::S_CONFIG_DIR_AUDIT_PREFIX: // "CONFIG_DIR_AUDIT_PREFIX"
       case symbol_kind::S_CONFIG_DIR_AUDIT_TPE: // "CONFIG_DIR_AUDIT_TPE"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LOG: // "CONFIG_DIR_DEBUG_LOG"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LVL: // "CONFIG_DIR_DEBUG_LVL"
@@ -6354,16 +6354,16 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_CONFIG_DIR_AUDIT_LOG_HEAD (std::string v, location_type l)
+      make_CONFIG_DIR_AUDIT_PREFIX (std::string v, location_type l)
       {
-        return symbol_type (token::TOK_CONFIG_DIR_AUDIT_LOG_HEAD, std::move (v), std::move (l));
+        return symbol_type (token::TOK_CONFIG_DIR_AUDIT_PREFIX, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_CONFIG_DIR_AUDIT_LOG_HEAD (const std::string& v, const location_type& l)
+      make_CONFIG_DIR_AUDIT_PREFIX (const std::string& v, const location_type& l)
       {
-        return symbol_type (token::TOK_CONFIG_DIR_AUDIT_LOG_HEAD, v, l);
+        return symbol_type (token::TOK_CONFIG_DIR_AUDIT_PREFIX, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -8359,7 +8359,7 @@ switch (yykind)
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG2: // "CONFIG_DIR_AUDIT_LOG2"
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_P: // "CONFIG_DIR_AUDIT_LOG_P"
       case symbol_kind::S_CONFIG_DIR_AUDIT_STS: // "CONFIG_DIR_AUDIT_STS"
-      case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_HEAD: // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      case symbol_kind::S_CONFIG_DIR_AUDIT_PREFIX: // "CONFIG_DIR_AUDIT_PREFIX"
       case symbol_kind::S_CONFIG_DIR_AUDIT_TPE: // "CONFIG_DIR_AUDIT_TPE"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LOG: // "CONFIG_DIR_DEBUG_LOG"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LVL: // "CONFIG_DIR_DEBUG_LVL"
@@ -8625,7 +8625,7 @@ switch (yykind)
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG2: // "CONFIG_DIR_AUDIT_LOG2"
       case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_P: // "CONFIG_DIR_AUDIT_LOG_P"
       case symbol_kind::S_CONFIG_DIR_AUDIT_STS: // "CONFIG_DIR_AUDIT_STS"
-      case symbol_kind::S_CONFIG_DIR_AUDIT_LOG_HEAD: // "CONFIG_DIR_AUDIT_LOG_HEAD"
+      case symbol_kind::S_CONFIG_DIR_AUDIT_PREFIX: // "CONFIG_DIR_AUDIT_PREFIX"
       case symbol_kind::S_CONFIG_DIR_AUDIT_TPE: // "CONFIG_DIR_AUDIT_TPE"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LOG: // "CONFIG_DIR_DEBUG_LOG"
       case symbol_kind::S_CONFIG_DIR_DEBUG_LVL: // "CONFIG_DIR_DEBUG_LVL"

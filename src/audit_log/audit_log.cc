@@ -120,8 +120,8 @@ bool AuditLog::setFilePath2(std::string_view path) {
 }
 
 
-bool AuditLog::setHeader(std::string_view header) {
-    this->m_header = header;
+bool AuditLog::setPrefix(std::string_view prefix) {
+    this->m_prefix = prefix;
     return true;
 }
 
@@ -331,7 +331,7 @@ bool AuditLog::merge(AuditLog *from, std::string *error) {
     AL_MERGE_STRING_CONF(from->m_path2, m_path2);
     AL_MERGE_STRING_CONF(from->m_storage_dir, m_storage_dir);
     AL_MERGE_STRING_CONF(from->m_relevant, m_relevant);
-    AL_MERGE_STRING_CONF(from->m_header, m_header);
+    AL_MERGE_STRING_CONF(from->m_prefix, m_prefix);
 
     if (from->m_filePermission != -1) {
         m_filePermission = from->m_filePermission;

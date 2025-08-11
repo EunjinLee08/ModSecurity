@@ -59,3 +59,6 @@ uselessCallsSubstr
 
 // Examples
 memleak:examples/using_bodies_in_chunks/simple_request.cc
+
+// supress seclang-parser.hh warnings
+uninitMemberVar:src/parser/seclang-parser.hh

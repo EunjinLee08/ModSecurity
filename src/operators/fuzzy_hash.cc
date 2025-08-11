@@ -48,7 +48,7 @@ bool FuzzyHash::init(const std::string &param2, std::string *error) {
     std::string resource = utils::find_resource(file, param2, &err);
     iss = new std::ifstream(resource, std::ios::in);
 
-    if ((iss)->is_open() == false) {
+    if (iss->is_open() == false) {
         error->assign("Failed to open file: " + m_param + ". " + err);
         delete iss;
         return false;

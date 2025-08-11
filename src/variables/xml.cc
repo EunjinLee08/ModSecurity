@@ -91,7 +91,7 @@ void XML::evaluate(Transaction *t,
     } else {
         std::vector<actions::Action *> acts = rule->getActionsByName("xmlns", t);
         for (auto &x : acts) {
-            actions::XmlNS *z = reinterpret_cast<actions::XmlNS *>(x);
+            actions::XmlNS *z = static_cast<actions::XmlNS *>(x);
             if (xmlXPathRegisterNs(xpathCtx, reinterpret_cast<const xmlChar*>(z->m_scope.c_str()),
                     reinterpret_cast<const xmlChar*>(z->m_href.c_str())) != 0) {
                 ms_dbg_a(t, 1, "Failed to register XML namespace href \"" + \

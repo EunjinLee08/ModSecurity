@@ -227,8 +227,15 @@ bool Rbl::evaluate(Transaction *t, RuleWithActions *rule,
     }
 
     struct sockaddr *addr = info->ai_addr;
-    struct sockaddr_in *sin = (struct sockaddr_in *) addr;
-    furtherInfo(sin, ipStr, t, m_provider);
+    if (addr->sa_family == AF_INET) { // only IPv4 address is allowed
+        struct sockaddr_in *sin = reinterpret_cast<struct sockaddr_in *>(addr);
+        furtherInfo(sin, ipStr, t, m_provider);
+    }
+    else {
+        ms_dbg_a(t, 7,  "Unsupported address family: " + std::to_string(addr->sa_family));
+        freeaddrinfo(info);
+        return false;
+    }
 
     freeaddrinfo(info);
     if (rule && t && rule->hasCaptureAction()) {

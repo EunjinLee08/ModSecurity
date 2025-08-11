@@ -51,7 +51,7 @@ bool PmFromFile::init(const std::string &config, std::string *error) {
     for (const auto& token : tokens) {
         if (! token.empty()) {
 
-            std::istream *iss;
+            std::unique_ptr<std::istream> iss;
 
             if (token.compare(0, 8, "https://") == 0) {
                 Utils::HttpsClient client;
@@ -60,26 +60,22 @@ bool PmFromFile::init(const std::string &config, std::string *error) {
                     error->assign(client.error);
                     return false;
                 }
-                iss = new std::stringstream(client.content);
+                iss = std::make_unique<std::stringstream>(client.content);
             } else {
                 std::string err;
                 std::string resource = utils::find_resource(token, config, &err);
-                iss = new std::ifstream(resource, std::ios::in);
-
-                if (((std::ifstream *)iss)->is_open() == false) {
+                auto file = std::make_unique<std::ifstream>(resource, std::ios::in);
+                if (file->is_open() == false) {
                     error->assign("Failed to open file: '" + token + "'. " + err);
-                    delete iss;
                     return false;
                 }
+                iss = std::move(file);
             }
-
             for (std::string line; std::getline(*iss, line); ) {
                 if (isComment(line) == false) {
                     acmp_add_pattern(m_p, line.c_str(), NULL, NULL, line.length());
                 }
             }
-
-            delete iss;
         }
     }
 

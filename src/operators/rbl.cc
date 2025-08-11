@@ -230,8 +230,9 @@ bool Rbl::evaluate(Transaction *t, RuleWithActions *rule,
     // SonarCloud suggested to use the init-statement to declare "addr" inside the if statement.
     // I think that's not good here, because we need that in the else block
     struct sockaddr *addr = info->ai_addr;
+    // NOSONAR
     if (addr->sa_family == AF_INET) { // only IPv4 address is allowed
-        struct sockaddr_in *sin = (struct sockaddr_in *) addr; // cppcheck-suppress[dangerousTypeCast]
+        auto sin = (struct sockaddr_in *) addr; // cppcheck-suppress[dangerousTypeCast]
         furtherInfo(sin, ipStr, t, m_provider);
     }
     else {

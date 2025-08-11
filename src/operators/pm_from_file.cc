@@ -49,32 +49,33 @@ bool PmFromFile::init(const std::string &config, std::string *error) {
     std::vector<std::string> tokens = split(m_param, ' ');
 
     for (const auto& token : tokens) {
-        if (! token.empty()) {
+        if (token.empty()) {
+            continue;
+        }
 
-            std::unique_ptr<std::istream> iss;
+        std::unique_ptr<std::istream> iss;
 
-            if (token.compare(0, 8, "https://") == 0) {
-                Utils::HttpsClient client;
-                bool ret = client.download(token);
-                if (ret == false) {
-                    error->assign(client.error);
-                    return false;
-                }
-                iss = std::make_unique<std::stringstream>(client.content);
-            } else {
-                std::string err;
-                std::string resource = utils::find_resource(token, config, &err);
-                auto file = std::make_unique<std::ifstream>(resource, std::ios::in);
-                if (file->is_open() == false) {
-                    error->assign("Failed to open file: '" + token + "'. " + err);
-                    return false;
-                }
-                iss = std::move(file);
+        if (token.compare(0, 8, "https://") == 0) {
+            Utils::HttpsClient client;
+            bool ret = client.download(token);
+            if (ret == false) {
+                error->assign(client.error);
+                return false;
             }
-            for (std::string line; std::getline(*iss, line); ) {
-                if (isComment(line) == false) {
-                    acmp_add_pattern(m_p, line.c_str(), NULL, NULL, line.length());
-                }
+            iss = std::make_unique<std::stringstream>(client.content);
+        } else {
+            std::string err;
+            std::string resource = utils::find_resource(token, config, &err);
+            auto file = std::make_unique<std::ifstream>(resource, std::ios::in);
+            if (file->is_open() == false) {
+                error->assign("Failed to open file: '" + token + "'. " + err);
+                return false;
+            }
+            iss = std::move(file);
+        }
+        for (std::string line; std::getline(*iss, line); ) {
+            if (isComment(line) == false) {
+                acmp_add_pattern(m_p, line.c_str(), NULL, NULL, line.length());
             }
         }
     }

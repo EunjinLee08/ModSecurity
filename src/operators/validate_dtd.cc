@@ -45,7 +45,7 @@ bool ValidateDTD::init(const std::string &file, std::string *error) {
 
 bool ValidateDTD::evaluate(Transaction *transaction, const std::string &str) {
 
-    XmlDtdPtrManager dtd(xmlParseDTD(NULL, (const xmlChar *)m_resource.c_str()));
+    XmlDtdPtrManager dtd(xmlParseDTD(NULL, reinterpret_cast<const xmlChar *>(m_resource.c_str())));
     if (dtd.get() == NULL) {
         std::string err = std::string("XML: Failed to load DTD: ") \
             + m_resource;

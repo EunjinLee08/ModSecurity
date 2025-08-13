@@ -411,7 +411,7 @@ class Transaction : public TransactionAnchoredVariables, public TransactionSecMa
     int getRuleEngineState() const;
 
     std::string toJSON(int parts);
-    std::string toOldAuditLogFormat(int parts, const std::string &trailer);
+    std::string toOldAuditLogFormat(int parts, const std::string &trailer, const std::string &header);
     std::string toOldAuditLogFormatIndex(const std::string &filename,
         double size, const std::string &md5);
 

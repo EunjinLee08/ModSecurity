@@ -346,6 +346,7 @@ CONFIG_DIR_AUDIT_FLE_MOD                (?i:SecAuditLogFileMode)
 CONFIG_DIR_AUDIT_LOG2                   (?i:SecAuditLog2)
 CONFIG_DIR_AUDIT_LOG                    (?i:SecAuditLog)
 CONFIG_DIR_AUDIT_LOG_FMT                (?i:SecAuditLogFormat)
+CONFIG_DIR_AUDIT_PREFIX                 (?i:SecAuditLogPrefix)
 CONFIG_DIR_AUDIT_LOG_P                  (?i:SecAuditLogParts)
 CONFIG_DIR_AUDIT_STS                    (?i:SecAuditLogRelevantStatus)
 CONFIG_DIR_AUDIT_TPE                    (?i:SecAuditLogType)
@@ -764,6 +765,8 @@ EQUALS_MINUS                            (?i:=\-)
 {CONFIG_DIR_AUDIT_LOG}[ \t]+["]{CONFIG_VALUE_PATH}["]                   { return p::make_CONFIG_DIR_AUDIT_LOG(parserSanitizer(strchr(yytext, ' ') + 1), *driver.loc.back()); }
 {CONFIG_DIR_AUDIT_STS}[ \t]+{FREE_TEXT_NEW_LINE}                        { return p::make_CONFIG_DIR_AUDIT_STS(parserSanitizer(strchr(yytext, ' ') + 1), *driver.loc.back()); }
 {CONFIG_DIR_AUDIT_STS}[ \t]+["]{NEW_LINE_FREE_TEXT}["]                  { return p::make_CONFIG_DIR_AUDIT_STS(parserSanitizer(strchr(yytext, ' ') + 1), *driver.loc.back()); }
+{CONFIG_DIR_AUDIT_PREFIX}[ \t]+{FREE_TEXT_NEW_LINE}                     { return p::make_CONFIG_DIR_AUDIT_PREFIX(parserSanitizer(strchr(yytext, ' ') + 1), *driver.loc.back()); }
+{CONFIG_DIR_AUDIT_PREFIX}[ \t]+["]{FREE_TEXT_NEW_LINE}["]               { return p::make_CONFIG_DIR_AUDIT_PREFIX(parserSanitizer(strchr(yytext, ' ') + 1), *driver.loc.back()); }
 {CONFIG_DIR_AUDIT_TPE}                                                  { return p::make_CONFIG_DIR_AUDIT_TPE(yytext, *driver.loc.back()); }
 
 

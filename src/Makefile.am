@@ -66,24 +66,7 @@ libmodsecurity_includesub_collection_HEADERS = \
 libmodsecurity_includesub_actions_HEADERS = \
 	../headers/modsecurity/actions/action.h
 
-
-noinst_HEADERS = \
-	$(wildcard actions/*.h) \
-	$(wildcard actions/ctl/*.h) \
-	$(wildcard actions/data/*.h) \
-	$(wildcard actions/disruptive/*.h) \
-	$(wildcard actions/transformations/*.h) \
-	$(wildcard debug_log/*.h) \
-	$(wildcard audit_log/writer/*.h) \
-	$(wildcard collection/backend/*.h) \
-	$(wildcard operators/*.h) \
-	$(wildcard parser/*.h) \
-	$(wildcard request_body_processor/*.h) \
-	$(wildcard utils/*.h) \
-	$(wildcard variables/*.h) \
-	$(wildcard engine/*.h) \
-	$(wildcard *.h)
-
+include headers.mk
 
 ENGINES = \
 	engine/lua.cc

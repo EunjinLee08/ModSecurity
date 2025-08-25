@@ -4,7 +4,7 @@ rm -rf autom4te.cache
 rm -f aclocal.m4
 
 cd src
-rm -f haders.mk
+rm -f headers.mk
 echo "noinst_HEADERS = \\" > headers.mk
 ls -1 \
     actions/*.h \

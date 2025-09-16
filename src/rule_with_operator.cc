@@ -158,7 +158,7 @@ inline void RuleWithOperator::getFinalVars(variables::Variables *vars,
     variables::Variables addition;
     getVariablesExceptions(*trans, exclusion, &addition); // cppcheck-suppress ctunullpointer
 
-    for (int i = 0; i < m_variables->size(); i++) {
+    for (std::size_t i = 0; i < m_variables->size(); i++) {
         Variable *variable = m_variables->at(i);
         if (exclusion->contains(variable)) {
             continue;

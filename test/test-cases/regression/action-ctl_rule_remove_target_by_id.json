@@ -133,7 +133,7 @@
   {
     "enabled":1,
     "version_min":300000,
-    "title":"Testing CtlRuleRemoveTargetById (5)",
+    "title":"Testing CtlRuleRemoveTargetById (5): lowercase `Referer` header",
     "expected":{
       "http_code": 200
     },

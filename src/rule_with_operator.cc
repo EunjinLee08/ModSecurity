@@ -158,7 +158,7 @@ inline void RuleWithOperator::getFinalVars(variables::Variables *vars,
     variables::Variables addition;
     getVariablesExceptions(*trans, exclusion, &addition); // cppcheck-suppress ctunullpointer
 
-    for (int i = 0; i < m_variables->size(); i++) {
+    for (std::size_t i = 0; i < m_variables->size(); i++) {
         Variable *variable = m_variables->at(i);
         if (exclusion->contains(variable)) {
             continue;
@@ -166,8 +166,15 @@ inline void RuleWithOperator::getFinalVars(variables::Variables *vars,
         if (std::find_if(trans->m_ruleRemoveTargetById.begin(),
                 trans->m_ruleRemoveTargetById.end(),
                 [&, variable, this](const auto &m) -> bool {
-                    return m.first == m_ruleId
-                        && m.second == *variable->m_fullName.get();
+                    const auto& str1 = m.second;
+                    const auto& str2 = *variable->m_fullName.get();
+                    return m.first == m_ruleId &&
+                           str1.size() == str2.size() &&
+                           std::equal(str1.begin(), str1.end(), str2.begin(),
+                                      [](char a, char b) {
+                                          return std::tolower(static_cast<unsigned char>(a)) ==
+                                                 std::tolower(static_cast<unsigned char>(b));
+                                      }); // end-of std::equal
                 }) != trans->m_ruleRemoveTargetById.end()) {
             continue;
         }

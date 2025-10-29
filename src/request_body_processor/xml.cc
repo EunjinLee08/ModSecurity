@@ -249,6 +249,8 @@ bool XML::processChunk(const char *buf, unsigned int size,
                 error->assign("XML: Failed to create parsing context.");
                 return false;
             }
+            // disable parser errors being printed to stderr
+            m_data.parsing_ctx->options |= XML_PARSE_NOWARNING | XML_PARSE_NOERROR;
         }
 
         if (m_transaction->m_secXMLParseXmlIntoArgs
@@ -265,6 +267,8 @@ bool XML::processChunk(const char *buf, unsigned int size,
                 error->assign("XML: Failed to create parsing context for ARGS.");
                 return false;
             }
+            // disable parser errors being printed to stderr
+            m_data.parsing_ctx_arg->options |= XML_PARSE_NOWARNING | XML_PARSE_NOERROR;
         }
 
         return true;

@@ -16,7 +16,7 @@
 #ifdef WITH_LIBXML2
 #include <libxml/xmlschemas.h>
 #include <libxml/xpath.h>
-#include <libxml/SAX.h>
+#include <libxml/SAX2.h>
 #endif
 
 #include <string>
@@ -92,10 +92,6 @@ class XML {
     bool complete(std::string *err);
     static xmlParserInputBufferPtr unloadExternalEntity(const char *URI,
         xmlCharEncoding enc);
-
-    static void null_error(void *ctx, const char *msg, ...) { // cppcheck-suppress[constParameterPointer,constParameterCallback]
-    }
-
 
     xml_data m_data;
 

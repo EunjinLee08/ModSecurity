@@ -274,7 +274,6 @@ bool XML::processChunk(const char *buf, unsigned int size,
     if (m_data.parsing_ctx != NULL &&
         m_transaction->m_secXMLParseXmlIntoArgs
         != RulesSetProperties::OnlyArgsConfigXMLParseXmlIntoArgs) {
-        xmlSetGenericErrorFunc(m_data.parsing_ctx, null_error);
         xmlParseChunk(m_data.parsing_ctx, buf, size, 0);
         m_data.xml_parser_state->parsing_ctx_arg = m_data.parsing_ctx_arg;
         if (m_data.parsing_ctx->wellFormed != 1) {
@@ -292,7 +291,6 @@ bool XML::processChunk(const char *buf, unsigned int size,
             m_transaction->m_secXMLParseXmlIntoArgs
               == RulesSetProperties::TrueConfigXMLParseXmlIntoArgs)
         ) {
-        xmlSetGenericErrorFunc(m_data.parsing_ctx_arg, null_error);
         xmlParseChunk(m_data.parsing_ctx_arg, buf, size, 0);
         if (m_data.parsing_ctx_arg->wellFormed != 1) {
             error->assign("XML: Failed to parse document for ARGS.");

@@ -33,12 +33,6 @@ bool ValidateDTD::init(const std::string &file, std::string *error) {
         return false;
     }
 
-    xmlThrDefSetGenericErrorFunc(NULL,
-        null_error);
-
-    xmlSetGenericErrorFunc(NULL,
-        null_error);
-
     return true;
 }
 
